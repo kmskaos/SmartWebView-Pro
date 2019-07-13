@@ -25,8 +25,38 @@ Receives data and builds notifications
 *Create a POST request with headers*
 URL `https://fcm.googleapis.com/fcm/send`
 content-type: `application/json`
-authorization: `key=____your_server_key_here___` (Firebase > Settings > Cloud Messaging > Server key)
+`authorization: key=____your_server_key_here___` (Firebase > Settings > Cloud Messaging > Server key)
 
+*PHP Example function*
+```
+function sendfcm($msg,$fcm_id) {
+	$url = 'https://fcm.googleapis.com/fcm/send';
+	$data = array (
+		'to' => $fcm_id,
+		'notification' => array (
+			"body" => $msg,
+			"title" => "Title",
+			"icon" => "myicon"
+		)
+	);
+	$data = json_encode ($data);
+	$headers = array (
+	'Authorization: key=' . "your_server_key_here",
+	'Content-Type: application/json'
+	);
+
+	$ch = curl_init ();
+	curl_setopt ( $ch, CURLOPT_URL, $url );
+	curl_setopt ( $ch, CURLOPT_POST, true );
+	curl_setopt ( $ch, CURLOPT_HTTPHEADER, $headers );
+	curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
+	curl_setopt ( $ch, CURLOPT_POSTFIELDS, $data );
+
+	$result = curl_exec ( $ch );
+	curl_close ( $ch );
+	echo $result;
+}
+```
 *Required JSON Data*
 ```
 { "notification": {
