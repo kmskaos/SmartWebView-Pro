@@ -25,7 +25,7 @@ Receives data and builds notifications
 *Create a POST request with headers*
 URL `https://fcm.googleapis.com/fcm/send`
 content-type: `application/json`
-authorization: `key=____your_server_key_here___` (Firebase > Settings > Cloud Messaging > Server key)
+`authorization: key=____your_server_key_here___` (Firebase > Settings > Cloud Messaging > Server key)
 
 *Required JSON Data*
 ```
